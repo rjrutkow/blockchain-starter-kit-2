@@ -13,30 +13,75 @@
  */
 
 /**
- * Write your model definitions here
+ * Dreamforce network definition.
  */
-
 namespace org.dreamforce
 
-participant SampleParticipant identified by participantId {
-  o String participantId
-  o String firstName
-  o String lastName
+participant Contact identified by contactId {
+  o String contactId
+  o String attendeeFirstName
+  o String attendeeLastName
+  o String avatarName
+  o AvatarAddress avatarAddress
+  o String avatarIncome
+  o String[] avatarQuestionArray
+  o String[] avatarAnswerArray
+  o String[] blockchainDemosEngaged
+  o Boolean hasVehichle
+  o Boolean hasVehicleStatusReport
+  o Boolean hasLoan
+  o String notes
 }
 
-asset SampleAsset identified by assetId {
-  o String assetId
-  --> SampleParticipant owner
-  o String value
+concept AvatarAddress {
+o String street
+o String city
+o String country
 }
 
-transaction SampleTransaction {
-  --> SampleAsset asset
-  o String newValue
+asset Vehicle identified by VIN {
+o String VIN
+o String make
+o String model
+o DateTime purchaseDateTime
+o String[] features
+o String summary
+--> Contact contact
 }
 
-event SampleEvent {
-  --> SampleAsset asset
-  o String oldValue
-  o String newValue
+asset VehicleStatus identified by VehicleStatusID {
+o String VehicleStatusID
+o String collison
+o Boolean airbagDeployed
+o DateTime vehcicleStatusDateTime
+--> Vehicle VIN
+}
+
+asset loan identified by loanID {
+o String loanID
+o Double originalAmount
+o Double RemainingAmount
+o DateTime loanDateTime
+o Integer remainingPayments
+o Double paymentAmount
+--> Contact contact
+--> Vehicle VIN
+}
+
+asset shipment identified by shipmentID {
+o String shipmentID
+o DateTime shipmentDateTime
+o String[] contents
+o String status
+o String location
+--> Contact contact
+--> Vehicle VIN
+}
+
+asset pointsLog identified by pointsLogID {
+o String pointsLogID
+o DateTime pointsLogDateTime
+o String Transaction
+o Integer Total
+--> Contact contact
 }

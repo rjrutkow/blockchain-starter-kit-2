@@ -15,37 +15,12 @@
 /**
  * Sample access control list.
  */
-rule EverybodyCanReadEverything {
+rule EverybodyCanReadWriteEverything {
     description: "Allow all participants read access to all resources"
-    participant: "org.dreamforce.SampleParticipant"
-    operation: READ
+    participant: "org.dreamforce.Contact"
+    operation: ALL
     resource: "org.dreamforce.*"
     action: ALLOW
-}
-
-rule EverybodyCanSubmitTransactions {
-    description: "Allow all participants to submit transactions"
-    participant: "org.dreamforce.SampleParticipant"
-    operation: CREATE
-    resource: "org.dreamforce.SampleTransaction"
-    action: ALLOW
-}
-
-rule OwnerHasFullAccessToTheirAssets {
-    description: "Allow all participants full access to their assets"
-    participant(p): "org.dreamforce.SampleParticipant"
-    operation: ALL
-    resource(r): "org.dreamforce.SampleAsset"
-    condition: (r.owner.getIdentifier() === p.getIdentifier())
-    action: ALLOW
-}
-
-rule SystemACL {
-  description:  "System ACL to permit all access"
-  participant: "org.hyperledger.composer.system.Participant"
-  operation: ALL
-  resource: "org.hyperledger.composer.system.**"
-  action: ALLOW
 }
 
 rule NetworkAdminUser {
@@ -61,5 +36,14 @@ rule NetworkAdminSystem {
     participant: "org.hyperledger.composer.system.NetworkAdmin"
     operation: ALL
     resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
+
+rule OwnerHasFullAccessToTheirAssets {
+    description: "Allow all participants full access to their assets"
+    participant(p): "org.dreamforce.Contact"
+    operation: ALL
+    resource(r): "org.dreamforce.Contact"
+    condition: (r.owner.getIdentifier() === p.getIdentifier())
     action: ALLOW
 }
