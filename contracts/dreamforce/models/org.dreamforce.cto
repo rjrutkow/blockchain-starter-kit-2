@@ -22,6 +22,7 @@ participant Contact identified by contactId {
   o String attendeeFirstName
   o String attendeeLastName
   o String avatarName
+  o String password
   o AvatarAddress avatarAddress
   o String avatarIncome
   o String[] avatarQuestionArray
