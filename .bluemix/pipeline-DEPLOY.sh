@@ -175,7 +175,7 @@ function deploy_composer_rest_server {
         ${CF_APP_NAME} \
         --docker-image ibmblockchain/composer-rest-server:${COMPOSER_VERSION} \
         -i 1 \
-        -m 256M \
+        -m 1024M \
         --no-start \
         --no-manifest
     cf set-env ${CF_APP_NAME} NODE_CONFIG "${NODE_CONFIG}"
